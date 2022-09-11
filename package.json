@@ -1,0 +1,31 @@
+{
+  "name": "template_web_app",
+  "version": "1.2.0",
+  "description": "The web application template.",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "zx": "node --loader ts-node/esm script/script.ts"
+  },
+  "type": "module",
+  "lint-staged": {
+    "*.{json,md}": [
+      "prettier --write",
+      "textlint"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.36",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.6.2",
+    "textlint": "^12.1.1",
+    "textlint-rule-preset-ja-spacing": "^2.2.0",
+    "textlint-rule-preset-ja-technical-writing": "^7.0.0",
+    "textlint-rule-spellcheck-tech-word": "^5.0.0",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2",
+    "zx": "^6.1.0"
+  }
+}
