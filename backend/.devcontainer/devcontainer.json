@@ -1,6 +1,6 @@
 {
-  "name": "template_web_app_backend",
-  "remoteUser": "template_web_app_backend",
+  "name": "practice_graphql_backend",
+  "remoteUser": "practice_graphql_backend",
   "dockerComposeFile": "../../docker-compose.dev.yaml",
   "service": "backend",
   "postAttachCommand": "yarn install",
