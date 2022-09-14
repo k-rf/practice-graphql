@@ -1,11 +1,26 @@
-import { Module } from "@nestjs/common";
+import * as path from "path";
 
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
+// import { ApolloDriverConfig, ApolloDriver } from "@nestjs/apollo";
+import { Module } from "@nestjs/common";
+import { GraphQLModule } from "@nestjs/graphql";
+import { MercuriusDriver, MercuriusDriverConfig } from "@nestjs/mercurius";
+
+import { PostsModule } from "~/features/posts/posts.module";
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    // GraphQLModule.forRoot<ApolloDriverConfig>({
+    //   driver: ApolloDriver,
+    //   autoSchemaFile: path.join(process.cwd(), "src/graphql/schema.gql"),
+    //   sortSchema: true,
+    // }),
+    GraphQLModule.forRoot<MercuriusDriverConfig>({
+      driver: MercuriusDriver,
+      autoSchemaFile: path.join(process.cwd(), "src/graphql/schema.gql"),
+      sortSchema: true,
+      graphiql: true,
+    }),
+    PostsModule,
+  ],
 })
 export class AppModule {}

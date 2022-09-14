@@ -5,7 +5,10 @@
   "words": [
     "CREATEDB",
     "esbuild",
+    "Fastify",
+    "graphiql",
     "linebreak",
+    "mercurius",
     "nestjs",
     "nothrow",
     "ossp",

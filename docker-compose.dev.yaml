@@ -78,6 +78,9 @@ services:
     working_dir: ${BACKEND_REMOTE_WORKSPACES}
     user: ${BACKEND_REMOTE_USER}
     tty: true
+    ports:
+      - 4000:4000
+      - 3000:3000
     dns:
       - 8.8.8.8
     volumes:
