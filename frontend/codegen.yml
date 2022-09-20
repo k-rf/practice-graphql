@@ -1,0 +1,19 @@
+overwrite: true
+# schema: "http://backend:3000/graphql"
+schema: "../backend/src/graphql/schema.gql"
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-query"
+    config:
+      fetcher:
+        endpoint: '"/api"'
+        fetchParams:
+          headers:
+            Content-Type: application/json
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
