@@ -1,7 +1,7 @@
 import { Collection } from "~/shared/collection";
 import { objectPropertySort } from "~/util/object-property-sort";
 
-type P = number | string | boolean | Date;
+type P = number | string | boolean | undefined | Date;
 type D = DomainPrimitive<Primitive, string>;
 type C = Collection<D, string>;
 type O = Record<string, C | D>;

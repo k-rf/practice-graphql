@@ -5,7 +5,7 @@ import { Uuid } from "./uuid";
 
 type D = DomainPrimitive<Primitive, string>;
 type C = Collection<D, string>;
-type O = Record<"id", Uuid<string>> & Record<string, C | D>;
+type O = Record<"id", Uuid<string>> & Record<string, C | D | undefined>;
 
 export abstract class Entity<T extends O, U extends string> {
   abstract readonly type: U;

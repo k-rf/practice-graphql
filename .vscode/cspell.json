@@ -24,6 +24,7 @@
     "tanstack",
     "textlint",
     "textlintrc",
+    "typeorm",
     "vite",
     "vitejs",
     "vitest",
