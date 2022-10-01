@@ -4,16 +4,20 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { PostModule } from "../post/post.module";
 
 import { AuthorResolver } from "./controller/author.resolver";
-import { AuthorRepository } from "./domain/author.repository";
-import { Author } from "./repository/author.entity";
+import { AuthorRepository } from "./core/domain/author.repository";
+import { CreateAuthorService } from "./core/service/create-author.service";
+import { GetAllAuthorService } from "./core/service/get-all-author.service";
+import { GetAuthorService } from "./core/service/get-author.service";
+import { AuthorEntity } from "./repository/author.entity";
 import { AuthorTypeOrmRepository } from "./repository/author.typeorm.repository";
-import { GetAuthorService } from "./service/get-author.service";
 
 @Module({
-  imports: [PostModule, TypeOrmModule.forFeature([Author])],
+  imports: [PostModule, TypeOrmModule.forFeature([AuthorEntity])],
   providers: [
     AuthorResolver,
     GetAuthorService,
+    GetAllAuthorService,
+    CreateAuthorService,
     { provide: AuthorRepository, useClass: AuthorTypeOrmRepository },
   ],
 })

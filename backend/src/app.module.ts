@@ -1,12 +1,13 @@
 import * as path from "path";
 
 import { ApolloDriverConfig, ApolloDriver } from "@nestjs/apollo";
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
 // import { MercuriusDriver, MercuriusDriverConfig } from "@nestjs/mercurius";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthorModule } from "./features/author/author.module";
+import { LoggerMiddleware } from "./middleware/logger.middleware";
 
 @Module({
   imports: [
@@ -28,8 +29,13 @@ import { AuthorModule } from "./features/author/author.module";
       database: "practice_graphql_db",
       synchronize: true,
       autoLoadEntities: true,
+      logging: "all",
     }),
     AuthorModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes({ path: "*", method: RequestMethod.ALL });
+  }
+}

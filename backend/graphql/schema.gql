@@ -10,15 +10,22 @@ type Author {
 }
 
 type Post {
-  id: Int!
+  id: ID!
   title: String!
   votes: Int
 }
 
 type Query {
-  author(id: Int!): Author!
+  author(id: ID!): Author!
+  authorAll: [Author!]!
 }
 
 type Mutation {
+  createAuthor(data: CreateAuthorModelInput!): String!
   post(data: String!): String
+}
+
+input CreateAuthorModelInput {
+  firstName: String
+  lastName: String
 }

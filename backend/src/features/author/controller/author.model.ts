@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 
-@ObjectType()
-export class Author {
+@ObjectType("Author")
+export class AuthorModel {
   @Field(() => ID)
   id!: string;
 

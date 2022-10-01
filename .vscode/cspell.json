@@ -4,11 +4,13 @@
   "ignorePaths": [".devcontainer", "node_modules", "*.lock"],
   "words": [
     "axios",
+    "clazz",
     "codegen",
     "CREATEDB",
     "esbuild",
     "Fastify",
     "graphiql",
+    "klass",
     "linebreak",
     "mercurius",
     "nestjs",
