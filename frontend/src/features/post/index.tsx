@@ -1,18 +1,23 @@
 import React from "react";
 
-import { usePostsQuery } from "~/generated/graphql";
+import { useOnCommentAddedSubscription, usePostsQuery } from "~/generated/graphql";
 
 export const PostRoute = () => {
   const { data } = usePostsQuery();
+  const { data: comment } = useOnCommentAddedSubscription();
 
   return (
     <>
-      {data?.posts?.map((post) => (
+      {data?.authorAll?.map((post) => (
         <React.Fragment key={post.id}>
           <div>{post.id}</div>
-          <div>{post.title}</div>
+          <div>
+            {post.firstName} {post.lastName}
+          </div>
         </React.Fragment>
       ))}
+      <div>---------- subscription ----------</div>
+      <div>{comment?.commentAdded.comment}</div>
     </>
   );
 };

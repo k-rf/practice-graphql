@@ -1,6 +1,7 @@
 query Posts {
-  posts {
+  authorAll {
     id
-    title
+    firstName
+    lastName
   }
 }
