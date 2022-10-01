@@ -9,6 +9,10 @@ type Author {
   posts: [Post]
 }
 
+type Comment {
+  comment: String
+}
+
 type Post {
   id: ID!
   title: String!
@@ -23,9 +27,18 @@ type Query {
 type Mutation {
   createAuthor(data: CreateAuthorModelInput!): String!
   post(data: String!): String
+  addComment(postId: ID!, comment: CommentInput!): Comment
 }
 
 input CreateAuthorModelInput {
   firstName: String
   lastName: String
+}
+
+input CommentInput {
+  commentAdded: String
+}
+
+type Subscription {
+  commentAdded: Comment!
 }

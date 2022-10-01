@@ -1,4 +1,9 @@
-import { Args, ID, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Inject } from "@nestjs/common";
+import { Args, ID, Mutation, Query, Resolver, Subscription } from "@nestjs/graphql";
+import { PubSub } from "graphql-subscriptions";
+
+import { Comment } from "~/features/post/controller/comment.model";
+import { PUB_SUB } from "~/lib/pubsub.constants";
 
 import { CreateAuthorInput } from "../core/service/create-author.input";
 import { CreateAuthorService } from "../core/service/create-author.service";
@@ -14,7 +19,8 @@ export class AuthorResolver {
   constructor(
     private getAuthorService: GetAuthorService,
     private getAllAuthorService: GetAllAuthorService,
-    private createAuthorService: CreateAuthorService
+    private createAuthorService: CreateAuthorService,
+    @Inject(PUB_SUB) public pubSub: PubSub
   ) {}
 
   @Query(() => AuthorModel)
@@ -34,5 +40,10 @@ export class AuthorResolver {
   @Mutation(() => String)
   async createAuthor(@Args("data") data: CreateAuthorModelInput) {
     return (await this.createAuthorService.handle(new CreateAuthorInput({ ...data }))).value.id;
+  }
+
+  @Subscription(() => Comment)
+  commentAdded() {
+    return this.pubSub.asyncIterator("commentAdded");
   }
 }

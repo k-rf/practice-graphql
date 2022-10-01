@@ -1,12 +1,13 @@
 import * as path from "path";
 
-import { ApolloDriverConfig, ApolloDriver } from "@nestjs/apollo";
+import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
 // import { MercuriusDriver, MercuriusDriverConfig } from "@nestjs/mercurius";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthorModule } from "./features/author/author.module";
+import { PubSubModule } from "./lib/pubsub.module";
 import { LoggerMiddleware } from "./middleware/logger.middleware";
 
 @Module({
@@ -14,6 +15,9 @@ import { LoggerMiddleware } from "./middleware/logger.middleware";
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: path.join(process.cwd(), "graphql/schema.gql"),
+      subscriptions: {
+        "graphql-ws": true,
+      },
     }),
     // GraphQLModule.forRoot<MercuriusDriverConfig>({
     //   driver: MercuriusDriver,
@@ -32,6 +36,7 @@ import { LoggerMiddleware } from "./middleware/logger.middleware";
       logging: "all",
     }),
     AuthorModule,
+    PubSubModule,
   ],
 })
 export class AppModule implements NestModule {
